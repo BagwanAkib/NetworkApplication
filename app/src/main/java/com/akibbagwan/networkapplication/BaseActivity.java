@@ -17,6 +17,9 @@ import androidx.appcompat.app.AppCompatActivity;
 @SuppressLint("Registered")
 public abstract class BaseActivity extends AppCompatActivity implements NetworkChangeListener {
 
+    /*
+     *you can create own object for it
+     * */
     private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -38,11 +41,17 @@ public abstract class BaseActivity extends AppCompatActivity implements NetworkC
      * If you like to check it manually you also cam use the bellow function for it
      * */
     public void checkInternet() {
-        ConnectivityManager manager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-        if (manager != null && manager.isActiveNetworkMetered())
+        ConnectivityManager manager = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
+        /* previous way of doing it*/
+        NetworkInfo ni = null;
+        if (manager != null) {
+            ni = manager.getActiveNetworkInfo();
+        }
+        if (ni != null && ni.isConnected()) {
             networkAvailable();
-        else
+        } else {
             networkUnavailable();
+        }
     }
 
     @Override
