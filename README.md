@@ -3,8 +3,12 @@
 There is two way what i mentioned in this git repository, are as follows:
 
 > **Broadcast**
->
+
+
+
 With broadcast you can get realtime state of your device network.
+
+
 ```java
 
 private BroadcastReceiver networkStateReceiver = new BroadcastReceiver() {
